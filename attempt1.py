@@ -4,25 +4,52 @@ from truss_solver_functions import *
 # -------------------------
 # INPUT
 # -------------------------
-NL = np.array([[0, 0],
-               [1, 0],
-               [0.5, 1]])
 
-EL = np.array([[1, 2],
-               [2, 3],
-               [3, 1]])
+### example ###
+#NL = np.array([[0, 0],
+ #              [1, 0],
+  #             [0.5, 1]])
 
-DorN = np.array([[-1, -1],
-                 [1, -1],
-                 [1, 1]])
+#EL = np.array([[1, 2],
+ #              [2, 3],
+  #             [3, 1]])
 
-F_input = np.array([[0, 0],
-                    [0, 0],
-                    [0, -20]])
+#DorN = np.array([[-1, -1],
+ #                [1, -1],
+  #               [1, 1]])
 
-U_input = np.array([[0, 0],
-                    [0, 0],
-                    [0, 0]])
+#F_input = np.array([[0, 0],
+ #                   [0, 0],
+  #                  [0, -20]])
+
+#U_input = np.array([[0, 0],
+ #                   [0, 0],
+  #                  [0, 0]])
+
+def read_nodes():
+    nodes = []
+    while True:
+        line = input("Enter node x y (blank to finish): ").strip()
+        if not line:
+            break
+        x, y = map(float, line.split())
+        nodes.append([x, y])
+    return np.array(nodes, dtype=float)
+
+def read_elements():
+    elements = []
+    while True:
+        line = input("Enter element n1 n2 (blank to finish): ").strip()
+        if not line:
+            break
+        n1, n2 = map(int, line.split())
+        elements.append([n1, n2])
+    return np.array(elements, dtype=int)
+
+    
+
+NL = read_nodes()
+EL = read_elements()
 
 E = 1e6
 A = 0.01
