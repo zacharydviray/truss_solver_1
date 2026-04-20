@@ -26,6 +26,8 @@ from truss_solver_functions import *
  #                   [0, 0],
   #                  [0, 0]])
 
+# Read node coordinates from user input until a blank line is entered.
+# Returns a NumPy array of node positions with shape (NoN, 2).
 def read_nodes():
     nodes = []
     while True:
@@ -36,6 +38,8 @@ def read_nodes():
         nodes.append([x, y])
     return np.array(nodes, dtype=float)
 
+# Read element connectivity from user input until a blank line is entered.
+# Each element is defined by two node indices.
 def read_elements():
     elements = []
     while True:
@@ -46,6 +50,8 @@ def read_elements():
         elements.append([n1, n2])
     return np.array(elements, dtype=int)
 
+# Read support boundary conditions for each node.
+# Returns a NumPy array where each row is [Dx, Dy] with 1 for free and -1 for constrained.
 def read_boundary_conditions(NoN):
     print("Enter boundary conditions for each node (1 for free, -1 for constrained):")
     DorN = []
@@ -60,6 +66,7 @@ def read_boundary_conditions(NoN):
                 print("Invalid input. Enter two integers separated by space.")
     return np.array(DorN, dtype=int)
 
+# Read applied forces for each node in the global X and Y directions.
 def read_forces(NoN):
     print("Enter applied forces for each node (Fx Fy):")
     F_input = []
@@ -74,6 +81,7 @@ def read_forces(NoN):
                 print("Invalid input. Enter two floats separated by space.")
     return np.array(F_input, dtype=float)
 
+# Read prescribed displacements for constrained nodes. Use 0 for free directions.
 def read_displacements(NoN):
     print("Enter prescribed displacements for each node (Ux Uy, 0 if free):")
     U_input = []
@@ -88,6 +96,7 @@ def read_displacements(NoN):
                 print("Invalid input. Enter two floats separated by space.")
     return np.array(U_input, dtype=float)
 
+# Plot the truss geometry using node coordinates and element connectivity.
 def plot_truss(NL, EL):
     plt.figure(figsize=(8, 6))
     
@@ -131,12 +140,10 @@ A = 0.01
 PD = NL.shape[1]
 NoN = NL.shape[0]
 
-def truss_check(NL, EL)
-    
-
-
-# plots what the truss would look like
-
+# Placeholder for truss validation logic.
+# This can be used to check element connectivity, duplicate nodes, or invalid geometry.
+def truss_check(NL, EL):
+    pass
 # checks boundary conditions
 
 # asks if this is the final truss to analyze.
