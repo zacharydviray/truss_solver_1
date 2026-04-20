@@ -4,6 +4,11 @@ import math
 
 
 def assign_BCs(NL, ENL):
+    """Assign global DOF numbering and map constrained DOFs.
+
+    Updates ENL with free and constrained degree-of-freedom numbering
+    and returns the total free DOFs and constrained DOCs.
+    """
     PD = np.size(NL, 1)
     NoN = np.size(NL, 0)
 
@@ -39,6 +44,11 @@ def assign_BCs(NL, ENL):
 # GLOBAL STIFFNESS ASSEMBLY
 # ----------------------------
 def assemble_stiffness(ENL, EL, NL, E, A):
+    """Assemble the global stiffness matrix for the truss.
+
+    Uses element connectivity and node data to build the global stiffness
+    matrix K from each element's local stiffness matrix.
+    """
 
     NoE = np.size(EL, 0)
     NPE = np.size(EL, 1)
@@ -70,6 +80,11 @@ def assemble_stiffness(ENL, EL, NL, E, A):
 # ELEMENT STIFFNESS MATRIX
 # ----------------------------
 def element_stiffness(n1, ENL, E, A):
+    """Compute the local stiffness matrix for a single truss element.
+
+    Calculates the 4x4 element stiffness matrix based on node coordinates,
+    material modulus E, cross-sectional area A, and element length.
+    """
 
     X1 = ENL[n1[0] - 1, 0]
     Y1 = ENL[n1[0] - 1, 1]
@@ -96,6 +111,11 @@ def element_stiffness(n1, ENL, E, A):
 
 
 def assemble_forces(ENL, NL):
+    """Assemble the global force vector for free degrees of freedom.
+
+    Extracts the applied forces for free DOFs from ENL and returns the
+    force vector Fp.
+    """
     PD = np.size(NL, 1)
     NoN = np.size(NL, 0)
 
@@ -112,6 +132,11 @@ def assemble_forces(ENL, NL):
 
 
 def assemble_displacement(ENL, NL):
+    """Assemble the prescribed displacement vector for constrained DOFs.
+
+    Extracts the known displacements from ENL for constrained DOFs and
+    returns the displacement vector Up.
+    """
     PD = np.size(NL, 1)
     NoN = np.size(NL, 0)
 
@@ -128,6 +153,11 @@ def assemble_displacement(ENL, NL):
 
 
 def update_nodes(ENL, U_u, NL, Fu):
+    """Update ENL node records with computed displacements and reactions.
+
+    Fills ENL with the solved free DOF displacements U_u and the reaction
+    forces Fu for constrained DOFs.
+    """
     PD = np.size(NL, 1)
     NoN = np.size(NL, 0)
 
